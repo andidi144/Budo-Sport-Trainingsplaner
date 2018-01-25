@@ -1,0 +1,5 @@
+<form #loginform="ngForm" (ngSubmit)="login(loginform.value)">
+    <input name="email" id="email" type="text" placeholder="Email..." required ngModel/>
+    <input name="password" id="password" type="password" placeholder="Password..." required ngModel/>
+    <button type="submit">Login</button>
+</form>
