@@ -5,22 +5,19 @@ import { Title } from '@angular/platform-browser';
 import { FirebaseService } from '../../Services/firebase.service';
 
 @Component({
-  selector: 'login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'settings',
+  templateUrl: './settings.component.html',
+  styleUrls: ['./settings.component.css']
 })
 
-export class LoginComponent {
+export class SettingsComponent {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
         private titleService: Title,
         public firebaseService: FirebaseService
     ) {
-        this.titleService.setTitle('Login - BSTP');
+        this.titleService.setTitle('Settings - BSTP');
     }
 
-    login(form: any): void {
-        this.firebaseService.login(form.email, form.password);
-    }
 }

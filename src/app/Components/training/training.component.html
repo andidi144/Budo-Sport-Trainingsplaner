@@ -1,0 +1,9 @@
+{{firebaseService.training.name}}
+{{weekdays[firebaseService.training.weekday]}}
+{{firebaseService.training.startingtime}} - {{firebaseService.training.endtime}}
+<div *ngFor="let individualtraining of firebaseService.training.individualtrainings" routerLink="/training/{{id}}/{{individualtraining.key}}" class="training">
+    {{individualtraining.subject}}
+    {{individualtraining.date}}
+    {{individualtraining.maintrainer}}
+    {{individualtraining.notes}}
+</div>

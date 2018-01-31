@@ -10,8 +10,11 @@ import { AuthGuard }              from './Guards/auth.guard';
 
 import { AppComponent }           from './app.component';
 import { YourTrainingsComponent } from './Components/yourTrainings/yourTrainings.component'
+import { TrainingComponent }      from './Components/training/training.component'
+import { IndividualtrainingComponent }      from './Components/individualtraining/individualtraining.component'
 import { LoginComponent }         from './Components/login/login.component'
 import { SignupComponent }        from './Components/signup/signup.component'
+import { SettingsComponent }        from './Components/settings/settings.component'
 
 import { AngularFireModule }          from 'angularfire2';
 import { AngularFireDatabaseModule }  from 'angularfire2/database';
@@ -29,8 +32,11 @@ export const firebaseConfig = {
   declarations: [
     AppComponent,
     YourTrainingsComponent,
+    TrainingComponent,
+    IndividualtrainingComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

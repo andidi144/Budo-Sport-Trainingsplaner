@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
   ) { }
 
   canActivate() {
-    if(this.firebaseService.afAuth.auth.currentUser) {
+    if(this.firebaseService.isLoggedIn()) {
       return true;
     } else {
       this.router.navigate(['/login']);

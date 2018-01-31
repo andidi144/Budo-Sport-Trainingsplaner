@@ -7,14 +7,18 @@ import { AngularFireDatabase, AngularFireList  } from 'angularfire2/database';
 import { FirebaseService } from '../../Services/firebase.service';
 
 @Component({
-  selector: 'yourTrainings',
-  templateUrl: './yourTrainings.component.html',
-  styleUrls: ['./yourTrainings.component.css']
+  selector: 'individualtraining',
+  templateUrl: './individualtraining.component.html',
+  styleUrls: ['./individualtraining.component.css']
 })
 
-export class YourTrainingsComponent {
+export class IndividualtrainingComponent {
 
-    trainings: Array<any>;
+    training: any;
+    id: string;
+    individualid: string;
+    private sub: any;
+
     weekdays: Array<string> = [
         "Montag",
         "Dienstag",
@@ -23,7 +27,7 @@ export class YourTrainingsComponent {
         "Freitag",
         "Samstag",
         "Sonntag"
-    ];
+    ]
 
     constructor(
         private route: ActivatedRoute,
@@ -31,11 +35,15 @@ export class YourTrainingsComponent {
         private titleService: Title,
         public firebaseService: FirebaseService
     ) {
-        this.titleService.setTitle('Your trainings - BSTP');
-        this.firebaseService.setYourTrainings();
+        this.titleService.setTitle('Training - BSTP');
     }
 
-    private isUserTrainer(training: any) {
-        return Object.values(training.trainer).indexOf(this.firebaseService.afAuth.auth.currentUser.email) > -1;
+    ngOnInit() {
+        this.sub = this.route.params.subscribe(params => {
+           this.id = params['id'];
+           this.individualid = params['individualid'];
+           this.firebaseService.setIndividualtraining(this.id, this.individualid);
+        });        
     }
+
 }
