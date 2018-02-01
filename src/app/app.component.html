@@ -3,12 +3,12 @@
     <ul>
         <li *ngIf="firebaseService.isLoggedIn()" role="presentation" routerLink="/yourTrainings" routerLinkActive="active">Your trainings</li>
         <li *ngIf="firebaseService.isLoggedIn()" role="presentation" routerLink="/settings" routerLinkActive="active">Account settings</li>
-        <li *ngIf="firebaseService.isLoggedIn()" (click)="logout()">Logout</li>
+        <li *ngIf="firebaseService.isLoggedIn()" (click)="logout()"><i class="material-icons">exit_to_app</i></li>
         <li *ngIf="!firebaseService.isLoggedIn()" role="presentation" routerLink="/login" routerLinkActive="active">Login</li>
         <li *ngIf="!firebaseService.isLoggedIn()" role="presentation" routerLink="/signup" routerLinkActive="active">Signup</li>
     </ul>
 </nav>
-<button (click)="navExtended = !navExtended" class="nav-toggle" [ngClass]="{'mobilenav': navExtended}">toggle</button>
+<button (click)="navExtended = !navExtended" class="nav-toggle" [ngClass]="{'mobilenav': navExtended}"><i class="material-icons">menu</i></button>
 <main>
     <router-outlet></router-outlet>
 </main>

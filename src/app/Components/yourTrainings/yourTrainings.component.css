@@ -1,6 +1,12 @@
 div.training {
+    text-align: center;
     width: auto;
     padding: 10px;
     border: 1px solid black;
     margin: 20px;
+
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+    background-color: #c60000;
+
+    cursor: pointer;
 }

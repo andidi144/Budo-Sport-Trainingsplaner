@@ -95,7 +95,7 @@ export class FirebaseService {
             d.setDate(nextTraning.getDate() + i * 7);
             trainingDates.push(d);
         }
-
+        this.individualtrainings = [];
         trainingDates.forEach(trainingDate => {
             var formattedDate = trainingDate.getFullYear() + '-' + this.months[trainingDate.getMonth()] + '-' + trainingDate.getDate();
             var index = this.findWithAttr(this.training.individualtrainings, "date", formattedDate);
@@ -105,10 +105,14 @@ export class FirebaseService {
             }
             else {
                 this.individualtrainings.push({
-                    
+                    date: formattedDate,
+                    subject: "Not defined",
+                    maintrainer: "",
+                    notes: ""
                 })
             }
         })
+        console.log(this.individualtrainings);
     }
 
     sortIndividualTraining(a, b) {

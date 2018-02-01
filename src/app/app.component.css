@@ -6,8 +6,12 @@ nav {
     top: 0;
     bottom: 0;
     overflow: hidden;
-    background-color: lightblue;
-    transition: width 0.5s ease-in;
+    background-color: #c94848;
+    transition: width 0.25s ease-in;
+
+    text-align: center;
+
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
 }
 
 nav ul {
@@ -24,18 +28,21 @@ nav ul {
 }
 
 nav ul li {
+    font-size: 18px;
     flex: 1;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding-left: 50px;
+
+    cursor: pointer;
 }
 
 nav ul li.active {
-    background-color: cornflowerblue;
+    background-color: #c60000;
 }
 
 main {
+    background-color: #262626;
     z-index: 1;
     position: absolute;
     left: 200px;
@@ -45,13 +52,14 @@ main {
 
     padding: 15px;
 
-    transition: left 0.5s ease-in;  
+    transition: left 0.25s ease-in;
+    overflow-y: auto;
 }
 
 .nav-toggle {
     z-index: 3;
     display: none;
-    transition: left 0.5s ease-in;  
+    transition: left 0.25s ease-in;
 }
 
 @media screen and (max-width: 900px) {
@@ -70,12 +78,28 @@ main {
     .nav-toggle {
         display: block;
         position: fixed;
-        top: 20px;
-        left: 20px;  
+        top: 10px;
+        left: 10px;  
     }
 
     .nav-toggle.mobilenav {
-        left: 220px;
+        left: 210px;
     }
 }
 
+nav ul li i {
+    font-size: 50px;
+}
+
+button {
+    background: none;
+    border: none;
+    height: 50px;
+    width: 50px;
+    margin: 0;
+    padding: 0;
+}
+
+button i {
+    font-size: 35px;
+}
