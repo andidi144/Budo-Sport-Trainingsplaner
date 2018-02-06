@@ -12,6 +12,7 @@ import { AppComponent }           from './app.component';
 import { YourTrainingsComponent } from './Components/yourTrainings/yourTrainings.component'
 import { TrainingComponent }      from './Components/training/training.component'
 import { IndividualtrainingComponent }      from './Components/individualtraining/individualtraining.component'
+import { NewIndividualtrainingComponent }      from './Components/newIndividualtraining/newIndividualtraining.component'
 import { LoginComponent }         from './Components/login/login.component'
 import { SignupComponent }        from './Components/signup/signup.component'
 import { SettingsComponent }        from './Components/settings/settings.component'
@@ -34,6 +35,7 @@ export const firebaseConfig = {
     YourTrainingsComponent,
     TrainingComponent,
     IndividualtrainingComponent,
+    NewIndividualtrainingComponent,
     LoginComponent,
     SignupComponent,
     SettingsComponent

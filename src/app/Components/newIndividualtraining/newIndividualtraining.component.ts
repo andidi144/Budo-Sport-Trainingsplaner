@@ -7,15 +7,16 @@ import { AngularFireDatabase, AngularFireList  } from 'angularfire2/database';
 import { FirebaseService } from '../../Services/firebase.service';
 
 @Component({
-  selector: 'training',
-  templateUrl: './training.component.html',
-  styleUrls: ['./training.component.css']
+  selector: 'newIndividualtraining',
+  templateUrl: './newIndividualtraining.component.html',
+  styleUrls: ['./newIndividualtraining.component.css']
 })
 
-export class TrainingComponent {
+export class NewIndividualtrainingComponent {
 
     training: any;
     id: string;
+    individualid: string;
     private sub: any;
 
     weekdays: Array<string> = [
@@ -35,18 +36,12 @@ export class TrainingComponent {
         public firebaseService: FirebaseService
     ) {
         this.titleService.setTitle('Training - BSTP');
-        
     }
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
-            this.id = params['id'];
-            this.firebaseService.setTraining(this.id);
-        });
+           this.id = params['id'];
+        });        
     }
 
-    formatDate(dateString: string) {
-        var date = new Date(dateString);
-        return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
-    }
 }

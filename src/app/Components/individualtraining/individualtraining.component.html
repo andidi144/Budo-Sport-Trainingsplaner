@@ -1,1 +1,11 @@
-{{firebaseService.individualtraining.subject}}
+{{(firebaseService.individualtraining | async)?.subject}}
+<form #trainingform="ngForm" (ngSubmit)="saveTraining(signupform.value)">
+    <input [(ngModel)]="firebaseService.individualtraining.subject" name="subject" id="subject" type="text" placeholder="Subject..." required />
+    <!-- <select name="trainer" id="trainer" required ngModel>
+        <option *ngFor="let trainer of firebaseService.training.trainer" value="trainer">
+            {{trainer}}
+        </option>
+    </select> -->
+    <input name="repeatpassword" id="repeatpassword" type="password" placeholder="Repeat password..." required ngModel/>
+    <button type="submit">Signup <i class="material-icons">send</i></button>
+</form>

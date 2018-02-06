@@ -13,7 +13,7 @@ export class FirebaseService {
 
     public trainings: Array<any>;
     public training: any;
-    public individualtraining: any;
+    public individualtraining: Observable<any>;
     public individualtrainings: Array<any>;
 
     private months: Array<string> = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
@@ -78,10 +78,8 @@ export class FirebaseService {
     }
 
     setIndividualtraining(id: string, individualid: string) {
-        this.individualtraining = {};
-        var training = this.db.object('/trainings/' + id + '/individualtrainings/' + individualid).valueChanges().subscribe( training => {
-            this.individualtraining = training;
-        });
+        this.individualtraining = this.db.object('/trainings/' + id + '/individualtrainings/' + individualid).valueChanges();
+        console.log(this.individualtraining);
     }
 
     setNextDates() {
