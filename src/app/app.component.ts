@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { FirebaseService } from './Services/firebase.service';
+import { ToastService, Toast } from './Services/toast.service';
 
 
 @Component({
@@ -13,12 +14,14 @@ export class AppComponent {
     navExtended: boolean = false;
 
     constructor(
-        public firebaseService: FirebaseService
+        public firebaseService: FirebaseService,
+        public toastService: ToastService
     ) {
 
     }
 
     logout() {
         this.firebaseService.logout();
+        this.toastService.addToast("Du hast dich erfolgreich ausgeloggt", "toast-success");
     }
 }

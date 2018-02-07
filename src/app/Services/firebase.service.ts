@@ -18,8 +18,6 @@ export class FirebaseService {
 
     public newTrainingReference: any;
 
-    private months: Array<string> = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
-
     constructor(
         public afAuth: AngularFireAuth, 
         public db: AngularFireDatabase,

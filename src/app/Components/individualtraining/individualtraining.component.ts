@@ -12,6 +12,8 @@ import { FirebaseService } from '../../Services/firebase.service';
   styleUrls: ['./individualtraining.component.css']
 })
 
+import { ToastService, Toast } from '../../Services/toast.service';
+
 export class IndividualtrainingComponent {
 
     training: any;
@@ -33,7 +35,8 @@ export class IndividualtrainingComponent {
         private route: ActivatedRoute,
         private router: Router,
         private titleService: Title,
-        public firebaseService: FirebaseService
+        public firebaseService: FirebaseService,
+        public toastService: ToastService
     ) {
         this.titleService.setTitle('Training - BSTP');
     }

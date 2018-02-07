@@ -5,6 +5,7 @@ import { FormsModule }            from '@angular/forms';
 import { AppRoutingModule }       from './app-routing.module';
 
 import { FirebaseService }        from './Services/firebase.service';
+import { ToastService }           from './Services/toast.service';
 
 import { AuthGuard }              from './Guards/auth.guard';
 
@@ -50,6 +51,7 @@ export const firebaseConfig = {
   ],
   providers: [
     FirebaseService,
+    ToastService,
     AuthGuard
   ],
   bootstrap: [AppComponent]

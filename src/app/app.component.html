@@ -1,4 +1,7 @@
 
+<div class="toast-container">
+    <div class="toast" *ngFor="let toast of toastService.toastArray; let i = index;" [ngClass]="toast.style" (click)="removeToast(i)">{{toast.text}}</div>
+</div>
 <nav [ngClass]="{'mobilenav': navExtended}">
     <ul>
         <li *ngIf="firebaseService.isLoggedIn()" role="presentation" routerLink="/yourTrainings" routerLinkActive="active">Deine Trainings</li>
