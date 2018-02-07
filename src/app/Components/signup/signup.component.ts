@@ -21,10 +21,9 @@ export class SignupComponent {
     }
 
     signup(form: any): void {
-        console.log(form);
         if(form.password == form.repeatpassword) {
             this.firebaseService.afAuth.auth.createUserWithEmailAndPassword(form.email, form.password).then(response =>{
-                console.log(response);
+                this.router.navigate(['/yourTrainings']);
             });
         }
     }

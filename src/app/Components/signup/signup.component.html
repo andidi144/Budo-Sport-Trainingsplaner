@@ -1,6 +1,7 @@
 <form #signupform="ngForm" (ngSubmit)="signup(signupform.value)">
+    <h2>Registrieren</h2>
     <input name="email" id="email" type="text" placeholder="Email..." required ngModel/>
-    <input name="password" id="password" type="password" placeholder="Password..." required ngModel/>
-    <input name="repeatpassword" id="repeatpassword" type="password" placeholder="Repeat password..." required ngModel/>
-    <button type="submit">Signup <i class="material-icons">send</i></button>
+    <input name="password" id="password" type="password" placeholder="Passwort..." required ngModel/>
+    <input name="repeatpassword" id="repeatpassword" type="password" placeholder="Passwort wiederholen..." required ngModel/>
+    <button type="submit" [disabled]="!signupform.valid">Registrieren <i class="material-icons">send</i></button>
 </form>

@@ -20,4 +20,16 @@ export class SettingsComponent {
         this.titleService.setTitle('Settings - BSTP');
     }
 
+    changePassword(form: any): void {
+        if(form.password == form.repeatpassword) {
+            // this.firebaseService.afAuth.auth.currentUser.updatePassword("TestPassw0rd!").then(response =>{
+            //     console.log(response);
+            // });
+            console.log(form);
+            this.firebaseService.afAuth.auth.currentUser.updatePassword(form.password).then(response =>{
+                this.router.navigate(['/yourTrainings']);
+            });
+        }
+    }
+
 }

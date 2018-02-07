@@ -1,1 +1,6 @@
-Work in progress
+<form #changepasswordform="ngForm" (ngSubmit)="changePassword(changepasswordform.value)">
+    <h2>Passwort ändern</h2>
+    <input name="password" id="password" type="password" placeholder="Neues Passwort..." ngModel required/>
+    <input name="repeatpassword" id="repeatpassword" type="password" placeholder="Passwort wiederholen..." ngModel required/>
+    <button type="submit" [disabled]="!changepasswordform.valid">Passwort ändern <i class="material-icons">send</i></button>
+</form>

@@ -1,1 +1,14 @@
-{{firebaseService.individualtraining.subject}}
+<form #newtrainingform="ngForm" (ngSubmit)="createTraining(newtrainingform.value)">
+    <h2>Neues Training</h2>
+    <input [(ngModel)]="newTraining.subject" name="subject" id="subject" type="text" placeholder="Thema..." required />
+    <select name="maintrainer" id="maintrainer" [(ngModel)]="newTraining.maintrainer"  required>
+        <option value="" disabled selected>Leitender Trainer...</option>
+        <option *ngFor="let trainer of firebaseService.training.trainer" [ngValue]="trainer">
+            {{trainer}}
+        </option>
+    </select>
+    <input [(ngModel)]="newTraining.date" name="date" id="date" type="date" placeholder="Datum..." required />
+    
+    <textarea [(ngModel)]="newTraining.notes" name="notes" id="notes" placeholder="Notizen..."></textarea>
+    <button type="submit" [disabled]="!newtrainingform.valid">Speichern <i class="material-icons">done</i></button>
+</form>

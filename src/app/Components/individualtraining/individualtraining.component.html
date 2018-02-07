@@ -1,11 +1,19 @@
-{{(firebaseService.individualtraining | async)?.subject}}
-<form #trainingform="ngForm" (ngSubmit)="saveTraining(signupform.value)">
-    <input [(ngModel)]="firebaseService.individualtraining.subject" name="subject" id="subject" type="text" placeholder="Subject..." required />
-    <!-- <select name="trainer" id="trainer" required ngModel>
-        <option *ngFor="let trainer of firebaseService.training.trainer" value="trainer">
+<form #trainingform="ngForm" (ngSubmit)="saveTraining(trainingform.value)">
+    <h2>Training bearbeiten</h2>
+    <input [ngModel]="(firebaseService.individualtraining | async)?.subject" (ngModelChange)="firebaseService.individualtraining.subject = $event" name="subject" id="subject" type="text" placeholder="Thema..." required />
+    <select name="maintrainer" id="maintrainer" required [ngModel]="(firebaseService.individualtraining | async)?.maintrainer" (ngModelChange)="firebaseService.individualtraining.maintrainer = $event" required>
+        <option *ngFor="let trainer of firebaseService.training.trainer" [ngValue]="trainer">
             {{trainer}}
         </option>
-    </select> -->
-    <input name="repeatpassword" id="repeatpassword" type="password" placeholder="Repeat password..." required ngModel/>
-    <button type="submit">Signup <i class="material-icons">send</i></button>
+    </select>
+    <input [ngModel]="(firebaseService.individualtraining | async)?.date" (ngModelChange)="firebaseService.individualtraining.date = $event" name="date" id="date" type="date" placeholder="Datum..." required />
+    
+    <textarea [ngModel]="(firebaseService.individualtraining | async)?.notes" (ngModelChange)="firebaseService.individualtraining.notes = $event" name="notes" id="notes" placeholder="Notizen..."></textarea>
+    <button type="submit" [disabled]="!trainingform.valid">Speichern <i class="material-icons">done</i></button>
+</form>
+
+<form #deleteForm="ngForm" (ngSubmit)="deleteTraining()">
+    <h2>Training löschen</h2>
+    <p>Die Daten können nicht wiederhergestellt werden!</p>
+    <button type="submit">Löschen <i class="material-icons">delete</i></button>
 </form>

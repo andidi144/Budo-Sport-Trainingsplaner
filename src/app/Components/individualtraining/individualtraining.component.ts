@@ -46,4 +46,14 @@ export class IndividualtrainingComponent {
         });        
     }
 
+    saveTraining(form: any) {
+        this.firebaseService.individualtrainingReference.update(form);
+        this.router.navigate(['/training/' + this.id]);
+    }
+
+    deleteTraining() {
+        this.firebaseService.individualtrainingReference.remove();
+        this.router.navigate(['/training/' + this.id]);
+    }
+
 }

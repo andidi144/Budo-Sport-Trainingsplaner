@@ -5,9 +5,9 @@ form {
     left: 50%;
     transform: translate(-50%, -50%);
     height: auto;
-    width: 300px;
-    max-width: 70%;
-    max-height: 70%;
+    width: 400px;
+    max-width: 80%;
+    max-height: 80%;
     
     background-color: #c60000;
     padding: 20px;
@@ -38,10 +38,23 @@ form button {
     border-radius: 2px;
     border: none;
     float: right;
+
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out;
+}
+
+form button:hover {
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+form button[disabled] {
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    color: #cccccc;
 }
 
 form button i {
     margin-left: 5px; 
-    color: #262626;
+    color: inherit;
     font-size: 18px;
 }

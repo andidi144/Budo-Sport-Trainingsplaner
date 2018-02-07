@@ -14,7 +14,9 @@ export class FirebaseService {
     public trainings: Array<any>;
     public training: any;
     public individualtraining: Observable<any>;
-    public individualtrainings: Array<any>;
+    public individualtrainingReference: any;
+
+    public newTrainingReference: any;
 
     private months: Array<string> = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
 
@@ -30,7 +32,6 @@ export class FirebaseService {
         this.afAuth.auth.signInWithEmailAndPassword(email, password).then(res => {
             this.router.navigate(['/yourTrainings']);
         });
-        
     }
 
     logout() {
@@ -72,45 +73,26 @@ export class FirebaseService {
 
             training['individualtrainings'] = individualtrainingsArray;
 
+            var trainersObject = training['trainer'];
+            var trainersArray = [];
+            for (var key in trainersObject) {
+                trainersArray.push(trainersObject[key]);
+            }
+
+            training['trainer'] = trainersArray;
+
+
             this.training = training;
-            this.setNextDates();
         });
     }
 
     setIndividualtraining(id: string, individualid: string) {
-        this.individualtraining = this.db.object('/trainings/' + id + '/individualtrainings/' + individualid).valueChanges();
-        console.log(this.individualtraining);
+        this.individualtrainingReference = this.db.object('/trainings/' + id + '/individualtrainings/' + individualid);
+        this.individualtraining = this.individualtrainingReference.valueChanges();
     }
 
-    setNextDates() {
-        var nextTraning = new Date();
-        nextTraning.setDate(nextTraning.getDate() + ((7-nextTraning.getDay())%7+(Number(this.training.weekday)+1) % 7));
-
-        var trainingDates = []; 
-
-        for (var i = 0; i < 10; i++) {
-            var d = new Date();
-            d.setDate(nextTraning.getDate() + i * 7);
-            trainingDates.push(d);
-        }
-        this.individualtrainings = [];
-        trainingDates.forEach(trainingDate => {
-            var formattedDate = trainingDate.getFullYear() + '-' + this.months[trainingDate.getMonth()] + '-' + trainingDate.getDate();
-            var index = this.findWithAttr(this.training.individualtrainings, "date", formattedDate);
-            if(index > -1) {
-                var selectedTraining = this.training.individualtrainings[index]
-                this.individualtrainings.push(selectedTraining);
-            }
-            else {
-                this.individualtrainings.push({
-                    date: formattedDate,
-                    subject: "Not defined",
-                    maintrainer: "",
-                    notes: ""
-                })
-            }
-        })
-        console.log(this.individualtrainings);
+    setNewTrainingReference(id: string) {
+        this.newTrainingReference = this.db.list('/trainings/' + id + '/individualtrainings/');
     }
 
     sortIndividualTraining(a, b) {

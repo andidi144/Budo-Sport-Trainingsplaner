@@ -19,6 +19,13 @@ export class NewIndividualtrainingComponent {
     individualid: string;
     private sub: any;
 
+    newTraining: any = {
+        subject: "",
+        maintrainer: "",
+        date: "",
+        notes: ""
+    };
+
     weekdays: Array<string> = [
         "Montag",
         "Dienstag",
@@ -41,7 +48,12 @@ export class NewIndividualtrainingComponent {
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
            this.id = params['id'];
-        });        
+           this.firebaseService.setNewTrainingReference(this.id);
+        });
     }
 
+    createTraining(form: any) {
+        this.firebaseService.newTrainingReference.push(form);
+        this.router.navigate(['/training/' + this.id]);
+    }
 }

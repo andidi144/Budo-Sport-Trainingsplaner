@@ -1,3 +1,5 @@
+<h1>Deine Trainings</h1>
+<h3>Angemeldet als {{firebaseService.afAuth.auth.currentUser.email}}</h3>
 <div *ngFor="let training of firebaseService.trainings" routerLink="/training/{{training.key}}" class="training">
         <h2>{{training.name}}</h2>
         {{weekdays[training.weekday]}},
