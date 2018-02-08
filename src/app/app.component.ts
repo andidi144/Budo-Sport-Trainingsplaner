@@ -22,6 +22,5 @@ export class AppComponent {
 
     logout() {
         this.firebaseService.logout();
-        this.toastService.addToast("Du hast dich erfolgreich ausgeloggt", "toast-success");
     }
 }

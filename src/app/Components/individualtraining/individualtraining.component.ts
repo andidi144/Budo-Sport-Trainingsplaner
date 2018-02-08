@@ -6,13 +6,13 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, AngularFireList  } from 'angularfire2/database';
 import { FirebaseService } from '../../Services/firebase.service';
 
+import { ToastService, Toast } from '../../Services/toast.service';
+
 @Component({
   selector: 'individualtraining',
   templateUrl: './individualtraining.component.html',
   styleUrls: ['./individualtraining.component.css']
 })
-
-import { ToastService, Toast } from '../../Services/toast.service';
 
 export class IndividualtrainingComponent {
 
@@ -50,12 +50,22 @@ export class IndividualtrainingComponent {
     }
 
     saveTraining(form: any) {
-        this.firebaseService.individualtrainingReference.update(form);
+        this.firebaseService.individualtrainingReference.update(form).then(response => {
+            this.toastService.addToast("Das Training wurde aktualisiert", "toast-success");
+        })
+        .catch(error => {
+            this.toastService.addToast(error.message, "toast-error");
+        });
         this.router.navigate(['/training/' + this.id]);
     }
 
     deleteTraining() {
-        this.firebaseService.individualtrainingReference.remove();
+        this.firebaseService.individualtrainingReference.remove().then(response => {
+            this.toastService.addToast("Das Training wurde gelöscht", "toast-success");
+        })
+        .catch(error => {
+            this.toastService.addToast(error.message, "toast-error");
+        });
         this.router.navigate(['/training/' + this.id]);
     }
 

@@ -6,6 +6,8 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, AngularFireList  } from 'angularfire2/database';
 import { FirebaseService } from '../../Services/firebase.service';
 
+import { ToastService, Toast } from '../../Services/toast.service';
+
 @Component({
   selector: 'newIndividualtraining',
   templateUrl: './newIndividualtraining.component.html',
@@ -40,7 +42,8 @@ export class NewIndividualtrainingComponent {
         private route: ActivatedRoute,
         private router: Router,
         private titleService: Title,
-        public firebaseService: FirebaseService
+        public firebaseService: FirebaseService,
+        public toastService: ToastService
     ) {
         this.titleService.setTitle('Training - BSTP');
     }
@@ -53,7 +56,12 @@ export class NewIndividualtrainingComponent {
     }
 
     createTraining(form: any) {
-        this.firebaseService.newTrainingReference.push(form);
+        this.firebaseService.newTrainingReference.push(form).then(response => {
+            this.toastService.addToast("Das Training wurde erstellt", "toast-success");
+        })
+        .catch(error => {
+            this.toastService.addToast(error.message, "toast-error");
+        });
         this.router.navigate(['/training/' + this.id]);
     }
 }

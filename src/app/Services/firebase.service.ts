@@ -5,6 +5,8 @@ import { AngularFireDatabase, AngularFireList  } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
+import { ToastService, Toast } from './toast.service';
+
 @Injectable()
 export class FirebaseService {
   
@@ -21,19 +23,41 @@ export class FirebaseService {
     constructor(
         public afAuth: AngularFireAuth, 
         public db: AngularFireDatabase,
-        private router: Router
+        private router: Router,
+        public toastService: ToastService
     ) {
         this.user = afAuth.authState;
     }
 
+    errorTranslation = {
+        "auth/invalid-email": "Gib eine gültige E-Mail Adresse ein",
+        "auth/user-not-found": "Es existiert kein Benutzer mit dieser E-Mail Adresse",
+        "auth/wrong-password": "Das Passwort ist falsch",
+        "auth/user-disabled": "Dieser Account wurde deaktiviert",
+        "auth/weak-password": "Das Passwort sollte mindestens 6 Zeichen lang sein",
+        "auth/requires-recent-login": "Du musst dich erneut einloggen",
+        "auth/email-already-in-use": "E-Mail Adresse wird bereits benutzt",
+        "auth/operation-not-allowed": "Diese Funktion ist momentan deaktiviert"
+    };
+
     login(email: string, password: string) {
-        this.afAuth.auth.signInWithEmailAndPassword(email, password).then(res => {
+        this.afAuth.auth.signInWithEmailAndPassword(email, password).then(response => {
+            this.toastService.addToast("Du hast dich eingeloggt", "toast-success");
             this.router.navigate(['/yourTrainings']);
+        })
+        .catch(error => {
+            console.log(error);
+            this.toastService.addToast(this.errorTranslation[error.code], "toast-error");
         });
     }
 
     logout() {
-        this.afAuth.auth.signOut();
+        this.afAuth.auth.signOut().then(response => {
+            this.toastService.addToast("Du hast dich ausgeloggt", "toast-success");
+        })
+        .catch(error => {
+            this.toastService.addToast(error.message, "toast-error");
+        });;
         this.router.navigate(['/login']);        
     }
 

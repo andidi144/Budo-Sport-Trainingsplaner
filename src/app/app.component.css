@@ -127,8 +127,8 @@ button i {
 .toast-container {
     position: fixed;
     right: 0;
-    width: 100%;
-    top: 50px;
+    width: calc(100% - 40px);
+    top: 0;
     height: auto;
     max-width: 300px;
     z-index: 1000;
@@ -139,7 +139,6 @@ button i {
     word-break: keep-all;
     word-wrap: normal;
     position: relative;
-    width: 100%;
     background-color: black;
     color: white;
     padding: 15px 15px 15px 50px;

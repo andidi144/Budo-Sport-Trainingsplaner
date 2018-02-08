@@ -4,6 +4,8 @@ import { Title } from '@angular/platform-browser';
 
 import { FirebaseService } from '../../Services/firebase.service';
 
+import { ToastService, Toast } from '../../Services/toast.service';
+
 @Component({
   selector: 'settings',
   templateUrl: './settings.component.html',
@@ -15,20 +17,24 @@ export class SettingsComponent {
         private route: ActivatedRoute,
         private router: Router,
         private titleService: Title,
-        public firebaseService: FirebaseService
+        public firebaseService: FirebaseService,
+        public toastService: ToastService
     ) {
         this.titleService.setTitle('Settings - BSTP');
     }
 
     changePassword(form: any): void {
         if(form.password == form.repeatpassword) {
-            // this.firebaseService.afAuth.auth.currentUser.updatePassword("TestPassw0rd!").then(response =>{
-            //     console.log(response);
-            // });
-            console.log(form);
-            this.firebaseService.afAuth.auth.currentUser.updatePassword(form.password).then(response =>{
+            this.firebaseService.afAuth.auth.currentUser.updatePassword(form.password).then(response => {
+                this.toastService.addToast("Passwort wurde geändert", "toast-success");
                 this.router.navigate(['/yourTrainings']);
+            })
+            .catch(error => {
+                this.toastService.addToast(this.firebaseService.errorTranslation[error.code], "toast-error");
             });
+        }
+        else {
+            this.toastService.addToast("Die Passwörter stimmen nicht überein", "toast-error");            
         }
     }
 
